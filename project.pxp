@@ -1,0 +1,40 @@
+hub {
+  enable-fileserver false
+  proxies {
+    video {
+      host localhost
+      port auto
+      id-pattern *
+      type-pattern video
+      exec {
+        command default
+        java-options {
+          -XstartOnFirstThread
+          -XX:+IgnoreUnrecognizedVMOptions
+          -Djava.awt.headless=true
+        }
+      }
+    }
+    audio {
+      host localhost
+      port auto
+      id-pattern *
+      type-pattern audio
+      exec {
+        command default
+      }
+    }
+  }
+}
+compiler {
+  release 21
+}
+libraries {}
+
+# <<<BUILD>>>
+include [file "audio.pxr"]
+include [file "video.pxr"]
+
+# <<<RUN>>>
+/video.start
+/audio.start
